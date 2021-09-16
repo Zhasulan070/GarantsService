@@ -34,10 +34,10 @@ namespace GarantsService
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore); ;
 
-            services.AddScoped<ICreateOrderService, CreateOrderService>();
             services.AddScoped<IRequestDeniedService, RequestDeniedService>();
-            services.AddScoped<ICheckOrderService, CheckOrderService>();
             services.AddScoped<IGetReferencesService, GetReferencesService>();
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IGetNameByBinService, GetNameByBinService>();
             services.AddSwaggerGen();
             
             

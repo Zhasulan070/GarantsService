@@ -15,5 +15,6 @@ namespace GarantsService.Context
         public DbSet<FilialModel> FilialModels { get; set; }
         public DbSet<CurrencyModel> CurrencyModels { get; set; }
         public DbSet<RequestTypeModel> RequestTypeModels { get; set; }
+        public DbSet<LoanRequestModel> LoanRequestModels { get; set; }
     }
 }
