@@ -38,6 +38,7 @@ namespace GarantsService
             services.AddScoped<IGetReferencesService, GetReferencesService>();
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IGetNameByBinService, GetNameByBinService>();
+            services.AddScoped<IGetChecherService, GetChecherService>();
             services.AddSwaggerGen();
             
             
