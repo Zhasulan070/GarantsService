@@ -17,5 +17,6 @@ namespace GarantsService.Context
         public DbSet<RequestTypeModel> RequestTypeModels { get; set; }
         public DbSet<LoanRequestModel> LoanRequestModels { get; set; }
         public DbSet<CheckerModel> CheckerModels { get; set; }
+        public DbSet<UserModel> UserModels { get; set; }
     }
 }

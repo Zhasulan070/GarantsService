@@ -1,5 +1,6 @@
 using System;
 using GarantsService.Context;
+using GarantsService.Helpers;
 using GarantsService.Interfaces;
 using GarantsService.Services;
 using Microsoft.AspNetCore.Builder;
@@ -8,7 +9,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace GarantsService
 {
@@ -39,6 +39,8 @@ namespace GarantsService
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IGetNameByBinService, GetNameByBinService>();
             services.AddScoped<IGetChecherService, GetChecherService>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<JwtService>();
             services.AddSwaggerGen();
             
             
