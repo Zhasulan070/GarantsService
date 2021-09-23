@@ -18,9 +18,9 @@ namespace GarantsService.Services
             _context = context;
         }
         
-        public async Task<List<OrderModel>> GetOrder(int userId)
+        public async Task<List<OrderModel>> GetOrder(int userId, int positionId)
         {
-            var data = $"CALL GetOrderListByUserId({userId})";
+            var data = $"CALL GetOrderListByUserId({userId}, {positionId})";
             return await _context.OrderModels.FromSqlRaw(data).ToListAsync();
         }
 

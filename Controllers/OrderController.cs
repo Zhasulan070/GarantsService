@@ -23,18 +23,18 @@ namespace GarantsService.Controllers
         }
         
         [HttpGet("GetOrder")]
-        public async Task<IActionResult> GetOrder([FromQuery(Name = "userId")] string userId)
+        public async Task<IActionResult> GetOrder([FromQuery(Name = "userId")] string userId, [FromQuery(Name = "positionId")] string positionId)
         {
             var response = new Response<List<OrderModel>>();
             try
             {
-                response.Result = await _service.GetOrder(int.Parse(userId));
+                response.Result = await _service.GetOrder(int.Parse(userId), int.Parse(positionId));
                 response.StatusCode = 0;
             }
             catch (Exception e)
             {
                 response.StatusCode = -1;
-                response.ErrorMessage = "Some error in CheckOrder service";
+                response.ErrorMessage = "Some error in GetOrder service";
                 _logger.LogError(e, response.ErrorMessage);
             }
 
@@ -53,7 +53,7 @@ namespace GarantsService.Controllers
             catch (Exception e)
             {
                 response.StatusCode = -1;
-                response.ErrorMessage = "Some error in CheckOrder service";
+                response.ErrorMessage = "Some error in GetOrderByOrderId service";
                 _logger.LogError(e, response.ErrorMessage);
             }
 
