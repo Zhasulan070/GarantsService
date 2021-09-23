@@ -32,5 +32,10 @@ namespace GarantsService.Services
             return await _context.RequestTypeModels.ToListAsync();
         }
         
+        public async Task<List<SegmentModel>> SegmentList()
+        {
+            return await _context.SegmentModels.ToListAsync();
+        }
+        
     }
 }

@@ -26,6 +26,30 @@ namespace GarantsService.Controllers
             _logger = logger;
             _jwtService = jwtService;
         }
+        
+        [HttpPost("loginByUserId")]
+        public async Task<IActionResult> loginByUserId([FromQuery(Name = "username")] string username, [FromQuery(Name = "password")] string password)
+        {
+            var response = new Response<UserModel>();
+
+            try
+            {
+                var user = await _service.GetUserByUsername(username);
+                if (user == null) throw new DataException();
+                if (!user.Password.Equals(password)) throw new DataException();
+                
+                response.Result = user;
+                response.StatusCode = 0;
+            }
+            catch (Exception e)
+            {
+                response.StatusCode = -1;
+                response.ErrorMessage = e is DataException ? "Еmail или пароль не верный"
+                    : "Some problem in GetUserByUsername service";
+            }
+
+            return Ok(response);
+        }
 
         [HttpPost("login")]
         public async Task<IActionResult> LoginUser([FromQuery(Name = "username")] string username, [FromQuery(Name = "password")] string password)
@@ -58,8 +82,8 @@ namespace GarantsService.Controllers
 
             try
             {
-                var token = _jwtService.Verify(jwt);
-                var userId = int.Parse(token.Issuer);
+                // var token = _jwtService.Verify(jwt);
+                var userId = int.Parse(jwt);
 
                 response.Result = await _service.GetUserById(userId);
                 response.StatusCode = 0;

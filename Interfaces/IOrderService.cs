@@ -6,7 +6,8 @@ namespace GarantsService.Interfaces
 {
     public interface IOrderService
     {
-        public Task<List<OrderModel>> CheckOrder(int userId);
-        public Task<string> CreateOrder(OrderModel createOrder);
+        public Task<List<OrderModel>> GetOrder(int userId);
+        public Task<Order> GetOrderByOrderId(int userId, int orderId);
+        public Task<string> CreateOrder(Order createOrder);
     }
 }

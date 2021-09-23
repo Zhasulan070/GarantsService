@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using GarantsService.Interfaces;
 using GarantsService.Models;
@@ -21,13 +22,13 @@ namespace GarantsService.Controllers
             _service = service;
         }
         
-        [HttpPost("CheckOrder")]
-        public async Task<IActionResult> CheckOrder([FromQuery(Name = "userId")] string userId)
+        [HttpGet("GetOrder")]
+        public async Task<IActionResult> GetOrder([FromQuery(Name = "userId")] string userId)
         {
             var response = new Response<List<OrderModel>>();
             try
             {
-                response.Result = await _service.CheckOrder(int.Parse(userId));
+                response.Result = await _service.GetOrder(int.Parse(userId));
                 response.StatusCode = 0;
             }
             catch (Exception e)
@@ -40,8 +41,28 @@ namespace GarantsService.Controllers
             return Ok(response);
         }
         
+        [HttpGet("GetOrderByOrderId")]
+        public async Task<IActionResult> GetOrderByOrderId([FromQuery(Name = "userId")] string userId, [FromQuery(Name = "orderId")] string orderId)
+        {
+            var response = new Response<Order>();
+            try
+            {
+                response.Result = await _service.GetOrderByOrderId(int.Parse(userId), int.Parse(orderId));
+                response.StatusCode = 0;
+            }
+            catch (Exception e)
+            {
+                response.StatusCode = -1;
+                response.ErrorMessage = "Some error in CheckOrder service";
+                _logger.LogError(e, response.ErrorMessage);
+            }
+
+            return Ok(response);
+        }
+        
+        
         [HttpPost("CreateOrder")]
-        public async Task<IActionResult> CreateOrder([FromBody] OrderModel order)
+        public async Task<IActionResult> CreateOrder([FromBody] Order order)
         {
             var response = new Response<string>();
             try
